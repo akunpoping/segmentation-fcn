@@ -21,12 +21,12 @@ A blog about the semantic segmentation using Fully Convolutional Networks
 ## 方法 ##
 - [ ] fully connected layer转化fully convoluational network
 这部分对应问题一，思想来源于overfeat，是FCN算法的灵魂：1. 卷积层->全连接层，看成对整幅图像的卷积运算；2. 全连接层->全连接层，看成采用1*1大小的卷积核进行卷积运算。《OverFeat: Integerated Recognition, Localization and Detection using Convolutional Networks》
-![]({{site.baseurl}}//1.jpg)
+![]({{site.baseurl}}//1.jpg)  
 如上图所示，图中绿色部分表示：卷积核大小。假设一个CNN模型输入图像大小14*14，一层卷积后得到10*10大小图像，池化后得到5*5大小的图像。关键步骤（5*5大小->1*1大小）：
 1. 传统CNN：这个过程是全连接层，会把5*5大小的图像展成一维向量；
 2. FCN：直接采用5*5的卷积核，对整张图像进行卷积。
 两者本质上相同，但角度不同，FCN对整幅特征图进行卷积，所有的全连接层也全部当做1*1大小的卷积核进行卷积运算。
-![]({{site.baseurl}}//2.jpg)
+![]({{site.baseurl}}//2.jpg)  
 由于设计好的网络卷积核大小是固定的，若稍微改变一下图像大小，采用上述网络进行前向传导，最后输出一张2*2的图片。这样FCN网络就可以输入任意大小的图片，而输出图像的大小和输入图像大小息息相关。
 - [] 如何对整幅图像做语义分割，实现dense pixels
 采用反卷积升采样方法。由于卷积和池化操作会缩小图像，接下来就需要将图像放大至原始大小。文献[2]中提到论文[1]中的反卷积存在的问题：
